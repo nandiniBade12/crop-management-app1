@@ -1,0 +1,46 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+      - id: user-service
+        uri: http://localhost:8081
+        predicates:
+        - Path=/users/**  
+        
+      - id: crops-microservice
+        uri: http://localhost:8089
+        predicates:
+        - Path=/crops/**
+        filters:
+            - AuthenticationFilter
+      - id: cart-microservice
+        uri: http://localhost:8083
+        predicates:
+        - Path=/cart/**
+        filters:
+            - AuthenticationFilter
+      - id: order-microservice
+        uri: http://localhost:8084
+        predicates:
+        - Path=/orders/**
+        filters:
+            - AuthenticationFilter
+      - id: payment-microservice
+        uri: http://localhost:8086
+        predicates:
+        - Path=/payment/**
+        filters:
+            - AuthenticationFilter
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
