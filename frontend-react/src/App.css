@@ -1,0 +1,9 @@
+.App {
+  text-align: center;
+}
+body{
+  /* background-image: url('./Images/farm_bg.jpg'); */
+  background-color: rgb(238, 233, 214);
+  background-size: contain;
+  background-attachment: scroll;
+}
